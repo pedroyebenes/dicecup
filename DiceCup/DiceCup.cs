@@ -48,13 +48,6 @@ namespace DiceCup
                         botches += 1;
                 }
             }
-            string summary = successes == 1 ? "Marginal success!"
-                    : successes == 2 ? "Moderate success!"
-                    : successes == 3 ? "Complete success!"
-                    : successes == 4 ? "Exceptional success!"
-                    : successes >= 5 ? "Phenomenal success!"
-                    : botches == 0 ? "Failure!" : "Botche!";
-
             if (successes > 0)
             {
                 successes = (successes - botches > 0) ? successes - botches : 0;
@@ -63,6 +56,14 @@ namespace DiceCup
             {
                 successes -= botches;
             }
+
+            string summary = successes == 1 ? "Marginal success!"
+                    : successes == 2 ? "Moderate success!"
+                    : successes == 3 ? "Complete success!"
+                    : successes == 4 ? "Exceptional success!"
+                    : successes >= 5 ? "Phenomenal success!"
+                    : successes == 0 ? "Failure!" : "Botche!";
+
             return summary;
         }
     }

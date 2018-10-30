@@ -37,11 +37,20 @@ namespace DiceCup
             List<int> results = diceCup.Roll(dices);
             string summary = diceCup.ParseRoll(results, difficulty, tensTwoSuccesses,
                                                out int successes, out int failures, out int botches);
-            Assert.True(summary != "");
-            if (successes == 0 && !tensTwoSuccesses)
-            {
-                Assert.AreEqual(successes + failures + 2 * botches, dices);
-            }
+            if (successes == 1)
+                Assert.True(summary == "Marginal success!", summary + " instead of " + "Marginal success!");
+            else if (successes == 2)
+                Assert.True(summary == "Moderate success!", summary + " instead of " + "Moderate success!");
+            else if (successes == 3)
+                Assert.True(summary == "Complete success!", summary + " instead of " + "Complete success!");
+            else if (successes == 4)
+                Assert.True(summary == "Exceptional success!", summary + " instead of " + "Exceptional success!");
+            else if (successes >= 5)
+                Assert.True(summary == "Phenomenal success!", summary + " instead of " + "Phenomenal success!");
+            else if (botches > 0 && successes == 0)
+                Assert.True(summary == "Botche!", summary + " instead of " + "Botche!");
+            else
+                Assert.True(summary == "Failure!", summary + " instead of " + "Failure!");
         }
 
         [Test]
@@ -60,9 +69,30 @@ namespace DiceCup
 
         [Test]
         [Repeat(100)]
+        public void TestSummary20_6_0()
+        {
+            TestSummary(20, 6, false);
+        }
+
+        [Test]
+        [Repeat(100)]
+        public void TestSummary20_6_1()
+        {
+            TestSummary(20, 6, true);
+        }
+
+        [Test]
+        [Repeat(100)]
         public void TestSummary20_9_0()
         {
             TestSummary(20, 9, false);
+        }
+
+        [Test]
+        [Repeat(100)]
+        public void TestSummary20_9_1()
+        {
+            TestSummary(20, 9, true);
         }
     }
 }
