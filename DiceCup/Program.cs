@@ -7,10 +7,18 @@ namespace DiceCup
     {
         public static void Main(string[] args)
         {
-            Application.Init();
-            MainWindow win = new MainWindow();
-            win.Show();
-            Application.Run();
+            if (args.Length > 0)
+            {
+                CLI cLI = new CLI(args);
+                cLI.Run();
+            }
+            else
+            {
+                Application.Init();
+                MainWindow win = new MainWindow();
+                win.Show();
+                Application.Run();
+            }
         }
     }
 }
